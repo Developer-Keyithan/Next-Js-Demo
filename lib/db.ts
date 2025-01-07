@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGO_URI = process.env.MONGO_URI as string;
+const MONGO_URI = process.env.MONGO_URI;
 
 const DBconnect = async () => {
     const databaseStatus = mongoose.connection.readyState;
@@ -18,13 +18,14 @@ const DBconnect = async () => {
     }
 
     try {
-        await mongoose.connect(MONGO_URI, {
-            dbName: 'NextJS-database'
+        await mongoose.connect(MONGO_URI!, {
+            dbName: 'NextJSAPI',
+            bufferCommands: true
         });
         console.log("Successfully connected to the database.");
-    } catch (error) {
-        console.error("Error connecting to the database:", (error as Error).message);
-        process.exit(1);
+    } catch (error: any) {
+        console.error("MongoDB connection error:", error);
+        throw new Error("MongoDB connection error:", error);
     }
 };
 
