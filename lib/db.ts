@@ -10,7 +10,7 @@ const DBconnect = async () => {
     }
     
     if (databaseStatus === 1) {
-        console.log("Database connected successfully");
+        console.log("Database connected successfully!");
     }
     
     if (databaseStatus === 2) {
